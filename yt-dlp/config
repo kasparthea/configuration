@@ -1,0 +1,1 @@
+-c --restrict-filenames -o '~/Documents/videos/saved/%(title)s.%(ext)s'

@@ -1,0 +1,15 @@
+#!/bin/sh
+feh --bg-fill --no-fehbg "$WALLPAPER" &
+emacs --daemon &
+addsup &
+xrdb -load ~/.config/x11/xdefaults &
+USERXSESSION="$XDG_CACHE_HOME/x11/xsession"
+USERXSESSIONRC="$XDG_CACHE_HOME/x11/xsessionrc"
+ALTUSERXSESSION="$XDG_CACHE_HOME/x11/Xsession"
+ERRFILE="$XDG_CACHE_HOME/x11/xsession-errors"
+picom --experimental-backend &
+dunst &
+numlockx &
+xrandr --output HDMI-0 --left-of DP-2 &
+barcher &
+exec herbstluftwm --locked

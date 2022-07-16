@@ -1,0 +1,56 @@
+Xft.dpi: 96
+!Xft.antialias: true
+!Xft.hinting: true
+Xft.rgba: rgb
+!Xft.autohint: true
+!Xft.hintstyle: hintfull
+!Xft.lcdfilter: lcdfilter
+! Dracula Xresources palette
+URxvt*.foreground: #F8F8F2
+URxvt*.background: #282A36
+URxvt.transparent: true
+URxvt.shading: 60
+URxvt.iso14755: false
+URxvt.iso14755_52: false
+URxvt.intensityStyles: true
+Xcursor.size: 32
+Xcursor.theme: Sweet-cursors
+XTerm*.foreground: #F8F8F2
+XTerm*.background: #282A36
+URxvt*.depth: 32
+*.color0:     #000000
+*.color1:     #FF5555
+*.color2:     #50FA7B
+*.color3:     #F1FA8C
+*.color4:     #BD93F9
+*.color5:     #FF79C6
+*.color6:     #8BE9FD
+*.color7:     #BFBFBF
+*.color8:     #4D4D4D
+*.color9:     #FF6E67
+*.color10:    #5AF78E
+*.color11:    #F4F99D
+*.color12:    #CAA9FA
+*.color13:    #FF92D0
+*.color14:    #9AEDFE
+*.color15:    #E6E6E6
+URxvt*imLocale: en_GB.UTF-8
+URxvt*buffered: false
+URxvt.scrollBar: false
+! somehow changing from size to pixelsize made
+! everything better
+! seems to make some changes in the good direction
+! well that is good enough for now, definitely better
+! than it was
+! think changing this pixelsize from 16 to 16.5 made a positive difference
+! so I am going to keep it that way, everything is finally good now
+! without those weird straight lines where the arrow started, finally
+URxvt*font:xft:Hack Nerd Font Mono:style=Regular
+XTerm*font:xft:Hack Nerd Font Mono:style=Regular:size=12
+! as it turns out this here has to be . not * after URxvt
+! resizing
+! z jakiegos powodu nie dziala
+!URxvt*keysym.C-Shift-k: perl:resize-font:bigger
+! urls
+Sxiv.background: #000000
+Sxiv.foreground: #00C0FF

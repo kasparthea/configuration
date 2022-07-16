@@ -1,0 +1,13 @@
+window:
+  opacity: 0.85
+
+font:
+  normal:
+    family: Hack Nerd Font Mono
+
+cursor:
+  style:
+    shape: Beam
+
+import:
+  - /home/thea/.config/alacritty/dracula.yml

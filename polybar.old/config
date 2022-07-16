@@ -1,0 +1,324 @@
+[colors]
+bg = #282a36
+bg-alt = #44475a
+fg = #f8f8f2
+; changed dreary secondary from line 29
+; to fg-alt for now
+fg-alt = #bd93f9
+
+blue = #6272a4
+cyan = #8be9fd
+green = #50fa7b
+orange = #ffb86c
+pink = #ff79c6
+purple = #bd93f9
+red = #ff5555
+yellow = #f1fa8c
+black = #000
+white = #FFF
+
+trans = #00000000
+semi-trans-black = #aa000000
+
+[bar/mybar]
+width = 100%
+height = 27
+offset-y = 7
+radius = 6.0
+fixed-center = false
+;spacing = 10
+
+background = ${colors.bg}
+foreground = ${colors.fg}
+
+line-size = 3
+line-color = #f00
+
+border-size = 4
+border-color = #00000000
+
+padding-left = 3
+padding-right = 3
+
+module-margin-left = 2
+module-margin-right = 0
+
+font-0 = Nerd Font Mono:size=11
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;font-2 = Wuncon Siji:style=Regular:pixelsize=11;1
+; so I had to install package from the aur
+; called neosiji. I do not know why this particular font is required.
+; one more reason to part with polybar maybe
+;font-2 = Siji:style=Regular:pixelsize=15:antialias=true
+font-2 = Siji
+
+; powermenu appers, now I have to decide where to put it
+modules-left = powermenu ewmh xwindow
+;modules-center = mpd
+modules-right = filesystem alsa battery memory cpu wlan date 
+
+tray-position = right
+tray-padding = 2
+
+[module/ewmh]
+type = internal/xworkspaces
+pin-workspaces = true
+enable-scroll = false
+label-active-foreground = ${colors.fg}
+label-active-background = ${colors.blue}
+label-active-underline = ${colors.pink}
+label-active-padding = 2
+label-occupied-padding = 1
+; the line above has to be set to 1 because
+; when it's 2 it's too broad
+label-occupied-foreground = ${colors.red}
+
+; do not uncomment the line below or the last
+; active workspace will disappear from the bar
+; why? I have no clue
+;label-occupied = %icon%
+;label-occupied-underline = ${colors.blue}
+;too ugly for now
+;label-active-margin = 1
+; this made everything better I hope
+; this two lines below gave more space
+; to like workspace labels
+label-empty-margin = 1
+label-occupied-margin = 1
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:30:...%
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+format-prefix = " "
+format-prefix-foreground = ${colors.fg-alt}
+format-prefix-underline = ${colors.fg-alt}
+
+label-layout = %layout%
+label-layout-underline = ${colors.fg-alt}
+
+label-indicator-padding = 2
+label-indicator-margin = 1
+label-indicator-background = ${colors.fg-alt}
+label-indicator-underline = ${colors.fg-alt}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+
+; i would like to use a variable after this F on the line
+; below but I could not get the syntax right so I just
+; replaced the previous colour with the new one
+label-mounted = %{F#6272a4}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.fg-alt}
+
+[module/mpd]
+type = internal/mpd
+format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+
+icon-prev = 
+icon-stop = 
+icon-play = 
+icon-pause = 
+icon-next = 
+
+label-song-maxlen = 25
+label-song-ellipsis = true
+
+[module/xbacklight]
+type = internal/xbacklight
+
+format = <label> <bar>
+label = BL
+
+bar-width = 10
+bar-indicator = |
+bar-indicator-foreground = #fff
+bar-indicator-font = 2
+bar-fill = ─
+bar-fill-font = 2
+bar-fill-foreground = #9f78e1
+bar-empty = ─
+bar-empty-font = 2
+bar-empty-foreground = ${colors.fg-alt}
+
+[module/backlight-acpi]
+inherit = module/xbacklight
+type = internal/backlight
+card = intel_backlight
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.red}
+format-underline = ${colors.red}
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-prefix-foreground = ${colors.green}
+format-underline = ${colors.green}
+label = %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline = ${colors.purple}
+label-connected = connected
+
+format-disconnected =
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.fg-alt}
+
+[module/eth]
+type = internal/network
+interface = enp2s0
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.fg-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+
+[module/date]
+type = internal/date
+interval = 1
+
+date-alt = "%d-%m"
+date = " %Y-%m-%d"
+
+time-alt = %H:%M
+time = %H:%M:%S
+
+format-prefix = 
+format-prefix-foreground = ${colors.white}
+format-underline = ${colors.blue}
+
+label = %date% %time%
+
+[module/alsa]
+type = internal/alsa
+
+format-volume = <label-volume> <bar-volume>
+label-volume = VOL
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.fg-alt}
+label-muted = sound muted
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.green}
+bar-volume-foreground-1 = ${colors.green}
+bar-volume-foreground-2 = ${colors.green}
+bar-volume-foreground-3 = ${colors.green}
+bar-volume-foreground-4 = ${colors.green}
+bar-volume-foreground-5 = ${colors.orange}
+bar-volume-foreground-6 = ${colors.red}
+bar-volume-gradient = false
+bar-volume-indicator = |
+bar-volume-indicator-font = 2
+bar-volume-fill = ─
+bar-volume-fill-font = 2
+bar-volume-empty = ─
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.white}
+
+[module/temperature]
+; seems good enough for now, just needed to set hwmon-path
+; accordingly, documentation here suggested something slightly
+; different
+type = internal/temperature
+;thermal-zone = 0
+warn-temperature = 70
+
+; maybe amd cpus need different path I do not know
+hwmon-path = /sys/class/hwmon/hwmon0/temp1_input
+
+format = <ramp> <label>
+format-underline = ${colors.orange}
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.red}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.orange}
+
+[module/powermenu]
+type = custom/menu
+
+expand-right = true
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.fg-alt}
+label-close =  cancel
+label-close-foreground = ${colors.fg-alt}
+label-separator = |
+label-separator-foreground = ${colors.fg-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = sudo reboot
+
+menu-2-0 = power off
+menu-2-0-exec = sudo poweroff
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP0
+poll-interval = 5
+
+[settings]
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+; the most important line right here, saved my life
+; I do not know why after one change in herbst conf it
+; stopped being transparent (or maybe because I uninstalled
+;picom, yeah that could be also the case)
+pseudo-transparency = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+; vim:ft=dosini

@@ -1,0 +1,26 @@
+auto-reload yes
+
+bind-key j next
+bind-key k prev
+bind-key J next-feed
+bind-key K prev-feed
+bind-key j down article
+bind-key k up article
+bind-key J next article
+bind-key K prev article
+bind-key h quit
+bind-key l open
+bind-key H hard-quit
+
+feed-sort-order date
+confirm-exit no
+confirm-mark-all-feeds-read no
+confirm-mark-feed-read no
+browser "/usr/bin/elinks %u"
+
+macro t set browser "/usr/bin/mpv --fullscreen --speed=1.5 %u" ; open-in-browser ; set browser "/usr/bin/elinks %u"
+macro y set browser "/usr/bin/mpv --fullscreen --speed=1.5 --ytdl-format=22 %u" ; open-in-browser ; set browser "/usr/bin/elinks %u"
+macro s set browser "/usr/bin/mpv --sid=1 --ytdl-format=22 --ytdl-raw-options=sub-lang=de,write-sub=,write-auto-sub= %u" ; open-in-browser ; set browser "/usr/bin/elinks %u"
+macro r set browser "/usr/bin/elinks $(echo %u | sed s/www/old/)" ; open-in-browser ; set browser "/usr/bin/elinks %u"
+macro n set browser "/usr/bin/netsurf %u 2>&1" ; open-in-browser ; set browser "/usr/bin/elinks %u"
+macro m set browser "$BROWSER %u" ; open-in-browser ; set browser "/usr/bin/elinks %u"
