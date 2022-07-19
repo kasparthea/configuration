@@ -74,6 +74,3 @@ alias ea="source *env/bin/activate"
 # translate aliases
 alias t='trans'
 alias tbr="trans -brief :ru"
-
-#config alias from hacker news adopted for me
-alias cnf='/usr/bin/git --git-dir=$HOME/Documents/configuration --work-tree=$HOME/.config'
