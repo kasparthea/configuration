@@ -5,6 +5,8 @@ font:
   normal:
     family: Hack Nerd Font Mono
 
+  size: 13
+
 cursor:
   style:
     shape: Beam
