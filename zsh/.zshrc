@@ -31,7 +31,9 @@ HISTFILE=~/.cache/zsh/zsh_history
 function vu(){
 	cd ~/University/
 }
-
+#autoload -U promptinit 
+#promptinit
+#prompt spaceship
 autoload -Uz compinit
 autoload -U colors && colors
 zstyle ':completion:*' menu select
