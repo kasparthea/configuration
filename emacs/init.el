@@ -61,10 +61,10 @@
 (setq recentf-max-saved-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
 
-;(require 'dashboard)
-;(dashboard-setup-startup-hook)
+(require 'dashboard)
+(dashboard-setup-startup-hook)
 
-;(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 (evil-set-leader 'normal (kbd "SPC"))
 
@@ -112,7 +112,11 @@
     "fr"  'counsel-recentf    ; find recently edited files
     "fs"  'save-buffer
     "fe"  'eval-buffer
-    "cc"  'recompile
+    ;;"cc"  (lambda () (interactive) (save-buffer) (recompile))
+    "cc"  (lambda () (interactive)  (with-current-buffer "*compilation*"
+  (let (kill-buffer-hook kill-buffer-query-functions)
+    (kill-buffer))) (save-buffer) (recompile))          
+    ;; source for the above https://emacs.stackexchange.com/questions/59348/force-kill-a-buffer
     "cC"  'compile
     ;"pf"  'counsel-git        ; find file in git project
 )
@@ -132,7 +136,10 @@
     "fr"  'counsel-recentf    ; find recently edited files
     "fs"  'save-buffer
     "fe"  'eval-buffer
-    "cc"  'recompile          ;; https://emacs.stackexchange.com/questions/10948/bind-the-make-command-to-a-shortcut
+    "cc"  (lambda () (interactive)  (with-current-buffer "*compilation*"
+  (let (kill-buffer-hook kill-buffer-query-functions)
+    (kill-buffer))) (save-buffer) (recompile))          
+;; https://emacs.stackexchange.com/questions/10948/bind-the-make-command-to-a-shortcut
     "cC"  'compile
     ;"pf"  'counsel-git        ; find file in git project
 )
@@ -170,10 +177,6 @@
   (setq dashboard-center-content t)
   (setq dashboard-set-footer nil)
   (dashboard-setup-startup-hook))
-  ;:hook (dashboard-refresh-buffer))
-  ;:hook ((after-init     . dashboard-refresh-buffer)))
-
-(setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
 
 ;;https://emacs.stackexchange.com/questions/3105/how-to-use-an-external-program-as-the-default-way-to-open-pdfs-from-emacs
 ;; did I get what I thought I would get? No, but I guess it beats docview for now 
