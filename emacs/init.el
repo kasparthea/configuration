@@ -117,7 +117,7 @@
   (let (kill-buffer-hook kill-buffer-query-functions)
     (kill-buffer))) (save-buffer) (recompile))          
     ;; source for the above https://emacs.stackexchange.com/questions/59348/force-kill-a-buffer
-    "cC"  'compile
+    "cC"  (lambda () (interactive) (save-buffer) (compile))
     ;"pf"  'counsel-git        ; find file in git project
 )
 
