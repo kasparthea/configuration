@@ -42,7 +42,7 @@ hc keybind $Mod-p spawn pass
 hc keybind $Mod-Shift-n spawn xournalpp
 hc keybind $Mod-e spawn emacsclient -c
 hc keybind $Mod-v spawn "$TERMINAL" -e "$EDITOR"
-hc keybind $Mod-Shift-s spawn scrot -s --line mode=edge "$HOME/Documents/pictures/saved/shot-%Y%m%d%H%M%S.png"
+hc keybind $Mod-Shift-s spawn scrot -s --line mode=edge "$HOME/Pictures/saved/shot-%Y%m%d%H%M%S.png"
 # function key binds
 # first for sound
 hc keybind 0x1008ff11 spawn voldec # 0x1008ff11 I got with xev, refers to XF86AudioLowerVolume
