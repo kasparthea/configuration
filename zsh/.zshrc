@@ -70,5 +70,5 @@ if [[ $(tty) = /dev/pts/* ]]; then
 	#eval "$(starship init zsh)"
 	alias ls='exa --icons --color=always'
 	alias ll='exa -lah --icons --color=always'
-	PROMPT="%(?:%{$fg_bold[red]%}%{$fg_bold[green]%}%{$fg_bold[yellow]%} :%{$fg_bold[red]%} ) "
+	PROMPT="%(?:%{$fg_bold[red]%}%{$fg_bold[green]%}%{$fg_bold[yellow]%} :%{$fg_bold[red]%} )%{$fg_bold[cyan]%} "
 fi
