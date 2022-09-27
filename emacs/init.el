@@ -7,7 +7,7 @@
 (setq coding-system-for-read 'utf-8 )   ; use utf-8 by default
 (setq coding-system-for-write 'utf-8 )
 (setq sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
-(setq default-fill-column 80)           ; wrap at 80th character mark
+;;(setq default-fill-column 80)           ; wrap at 80th character mark
 
 ;;(auto-fill-mode 1)                      ; make use of the above
 (require 'package)
@@ -162,6 +162,16 @@
 (add-hook 'dashboard-mode-hook 'line-dashboard-mode-hook)
 (defun line-dashboard-mode-hook ()
   (display-line-numbers-mode 0))
+
+(add-hook 'text-mode-hook 'wrap-text-mode-hook)
+(defun wrap-text-mode-hook ()
+  (setq fill-column 175)
+  (auto-fill-mode 1))
+
+(add-hook 'markdown-mode-hook 'wrap-markdown-mode-hook)
+(defun wrap-markdown-mode-hook ()
+  (setq fill-column 80)
+  (auto-fill-mode 1))
 
 (global-auto-revert-mode t)
 (setq global-auto-revert-non-file-buffers t)
