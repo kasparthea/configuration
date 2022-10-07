@@ -11,7 +11,7 @@ picom --experimental-backend &
 dunst &
 numlockx &
 xrandr --output HDMI-0 --left-of DP-2 &
-barcher &
+#barcher &
 unclutter &
 testcursor &
 exec herbstluftwm --locked
