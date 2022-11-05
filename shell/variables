@@ -6,7 +6,7 @@ export LESSHISTFILE="-"
 export EDITOR='nvim'
 export BLOCKSIZE='MiB'
 export TERMINAL='alacritty'
-export WALLPAPER=/home/thea/Pictures/wallpapers/IMG_20200322_211233.jpg
+export WALLPAPER=/home/thea/Pictures/wallpapers/The_Unfinished_Car_229.webp
 export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
 export BROWSER='firefox'
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/startup.py
@@ -50,3 +50,10 @@ export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 
 # nuget C#
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
+
+# rust
+export CARGO_HOME="$XDG_DATA_HOME"/cargo \
+	RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+
+# ocaml - partial
+export OPAMROOT="$XDG_DATA_HOME/opam"

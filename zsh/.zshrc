@@ -72,3 +72,6 @@ if [[ $(tty) = /dev/pts/* ]]; then
 	alias ll='exa -lah --icons --color=always'
 	PROMPT="%(?:%{$fg_bold[red]%}%{$fg_bold[green]%}%{$fg_bold[yellow]%} :%{$fg_bold[red]%} )%{$fg_bold[cyan]%} "
 fi
+
+# opam configuration
+[[ ! -r "$OPAMROOT"/opam-init/init.zsh ]] || source "$OPAMROOT"/opam-init/init.zsh  > /dev/null 2> /dev/null
