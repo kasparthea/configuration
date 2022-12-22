@@ -6,7 +6,7 @@ export LESSHISTFILE="-"
 export EDITOR='nvim'
 export BLOCKSIZE='MiB'
 export TERMINAL='alacritty'
-export WALLPAPER=$HOME/Pictures/wallpapers/The_Unfinished_Car_229.webp
+export WALLPAPER=$HOME/Pictures/wallpapers/City_Bridge.jpg
 export ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks
 export BROWSER='firefox'
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/startup.py
@@ -59,4 +59,4 @@ export CARGO_HOME="$XDG_DATA_HOME"/cargo \
 export OPAMROOT="$XDG_DATA_HOME/opam"
 
 # virt
-LIBVIRT_DEFAULT_URI="qemu:///system"
+export LIBVIRT_DEFAULT_URI="qemu:///system"

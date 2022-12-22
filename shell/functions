@@ -3,5 +3,5 @@ record() {
 }
 
 relmacs() {
-	killall -9 emacs && emacs --daemon
+	{ killall -9 emacs && emacs --daemon; } || emacs --daemon
 }
