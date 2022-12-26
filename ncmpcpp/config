@@ -1,6 +1,6 @@
 bind_to_address "127.0.0.1"
 ncmpcpp_directory "~/.config/ncmpcpp"
-mpd_music_dir "~/Documents/music"
+mpd_music_dir "~/Media/music"
 lyrics_directory = "~/.local/share/lyrics"
 
 visualizer_data_source = "/tmp/mpd.fifo"
