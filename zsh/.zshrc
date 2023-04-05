@@ -75,3 +75,5 @@ fi
 
 # opam configuration
 [[ ! -r "$OPAMROOT"/opam-init/init.zsh ]] || source "$OPAMROOT"/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+[ -f "/home/thea/.ghcup/env" ] && source "/home/thea/.ghcup/env" # ghcup-env
