@@ -1,1 +1,1 @@
--c --restrict-filenames -o '~/Videos/saved/%(title)s.%(ext)s'
+-c --restrict-filenames -o '~/Media/videos/saved/%(title)s.%(ext)s'
