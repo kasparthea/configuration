@@ -8,5 +8,8 @@ cursor:
   style:
     shape: Beam
 
+window:
+  opacity: 0.90
+
 import:
   - /home/thea/.config/alacritty/dracula.yml

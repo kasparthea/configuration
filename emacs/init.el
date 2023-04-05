@@ -34,7 +34,7 @@
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(org-agenda-files nil)
  '(package-selected-packages
-   '(typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet lsp-ivy validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math lsp-latex evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
+   '(lsp-haskell haskell-snippets haskell-mode typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet lsp-ivy validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math lsp-latex evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
  '(pdf-view-use-imagemagick t))
 
 (custom-set-faces
@@ -312,3 +312,19 @@
   :bind
   (:map tuareg-mode-map
 	("C-c C-s" . utop)))
+
+;; (set-frame-parameter nil 'alpha-background 90)
+;; (add-to-list 'default-frame-alist '(alpha-background . 90))
+
+;; https://kristofferbalintona.me/posts/202206071000/
+;; I found this advice online and it says that it should already
+;; be working with my version of emacs but for some reason it does not
+;; any way I leave this here for future tests because what I've got
+;; below is good for now but I generally prefer more up to date methods
+
+(set-frame-parameter (selected-frame) 'alpha '(95 . 85))
+(add-to-list 'default-frame-alist '(alpha . (95 . 85)))
+
+;; https://www.emacswiki.org/emacs/TransparentEmacs
+;; I hesitated initially because this mentioned 23+ which means
+;; that the advice was written a while ago
