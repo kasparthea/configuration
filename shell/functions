@@ -5,3 +5,9 @@ record() {
 relmacs() {
 	{ killall -9 emacs && emacs --daemon; } || emacs --daemon
 }
+
+points() {
+	 # takes field number as first argument
+	 # and file name as the second one
+	 cut -d, -f "$1" "$3" | paste -sd+ | bc
+}
