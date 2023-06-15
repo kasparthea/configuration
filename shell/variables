@@ -32,7 +32,7 @@ export QT_QPA_PLATFORMTHEME=gtk2 \
 export EDITOR='nvim' \
        TERMINAL='alacritty' \
        BROWSER='firefox' \
-       WALLPAPER=$HOME/Media/pictures/wallpapers/Field_Of_Lightning.jpg
+       WALLPAPER=$HOME/Media/pictures/wallpapers/Street_Lights_Twilight_Sky.jpg
 
 # haskell variables
 export STACK_ROOT="$XDG_DATA_HOME"/stack
