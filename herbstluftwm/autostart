@@ -25,7 +25,7 @@ hc substitute ALGO settings.default_frame_layout \
 		set_attr ATTR ALGO
 #hc set layout grid
 hc keybind $Mod-Shift-r reload
-hc keybind $Mod-F1 spawn "$TERMINAL" -e alsamixer
+#hc keybind $Mod-F1 spawn "$TERMINAL" -e alsamixer
 hc keybind $Mod-Shift-q close_and_remove
 hc keybind $Mod-q close
 hc keybind $Mod-r remove
