@@ -2,7 +2,8 @@
 feh --bg-fill --no-fehbg "$WALLPAPER" &
 emacs --daemon &
 addsup &
-xrdb -load ~/.config/x11/xdefaults &
+#xrdb -load ~/.config/x11/xdefaults &
+xrdb -load "$XDG_CONFIG_HOME"/x11/xdefaults &
 USERXSESSION="$XDG_CACHE_HOME/x11/xsession"
 USERXSESSIONRC="$XDG_CACHE_HOME/x11/xsessionrc"
 ALTUSERXSESSION="$XDG_CACHE_HOME/x11/Xsession"
