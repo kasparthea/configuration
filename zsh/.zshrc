@@ -10,6 +10,7 @@ setopt correct_all
 #source /usr/share/powerline/bindings/zsh/powerline.zsh
 
 bindkey -v
+bindkey "^R" history-incremental-pattern-search-backward
 
 HISTSIZE=100000000
 SAVEHIST=100000000
@@ -28,9 +29,6 @@ HISTFILE=~/.cache/zsh/zsh_history
 #	echo -e -n "\x1b[6 q" # changes to steady bar
 #}
 
-function vu(){
-	cd ~/University/
-}
 #autoload -U promptinit 
 #promptinit
 #prompt spaceship
@@ -73,7 +71,3 @@ if [[ $(tty) = /dev/pts/* ]]; then
 	#PROMPT="%(?:%{$fg_bold[red]%}%{$fg_bold[green]%}%{$fg_bold[yellow]%} :%{$fg_bold[red]%} )%{$fg_bold[cyan]%} "
 fi
 
-# opam configuration
-[[ ! -r "$OPAMROOT"/opam-init/init.zsh ]] || source "$OPAMROOT"/opam-init/init.zsh  > /dev/null 2> /dev/null
-
-[ -f "/home/thea/.ghcup/env" ] && source "/home/thea/.ghcup/env" # ghcup-env
