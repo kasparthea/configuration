@@ -112,7 +112,7 @@ autocmd BufEnter *.tex inoremap ,pr \par<CR>
 " instead of bufenter 
 " so no filetype and no bufread either i guess
 autocmd BufEnter *.txt inoremap ( ()<left>
-autocmd BufEnter *.txt setlocal spell spelllang=en_gb
+" autocmd BufEnter *.txt setlocal spell spelllang=en_gb
 " solve wrapping issue, sort of
 autocmd BufEnter *.txt set wm=1 
 autocmd BufEnter *.txt nmap <leader><Enter> 2<Enter>i
