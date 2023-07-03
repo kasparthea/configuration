@@ -1,76 +1,65 @@
 #!/bin/sh
-alias vi='nvim'
-alias less='less -r'
-alias svi='sudo nvim'
-alias grep='grep --color=always'
-alias yt='youtube-dl'
-alias yta='yt-dlp -o "$HOME/Documents/music/%(title)s.%(ext)s" -x --audio-format mp3'
-alias ytdlp='yt-dlp --config-location $XDG_CONFIG_HOME/youtube-dl/config'
-alias ytdlpv='yt-dlp -f bestvideo+bestaudio --config-location $XDG_CONFIG_HOME/youtube-dl/config'
-alias ytv='yt-dlp -f bestvideo+bestaudio "$@"'
-alias mkdir='mkdir -v'
-alias mk='mkdir'
-alias p3="python3 -q $@"
-alias sp3='sudo python3'
-alias rg='ranger'
-alias srg='sudo ranger'
-alias sa='ssh-add ~/.ssh/id_rsa'
-alias nb='newsboat'
-alias k9='killall -9'
-alias g11='g++ -std=c++11'
-alias szp='source ~/.zprofile'
-alias sz="source $XDG_CONFIG_HOME/zsh/.zshrc"
-alias rmd='rm -rf'
-alias po='sudo systemctl poweroff'
-alias rb='sudo systemctl reboot'
-alias gcu='gcc -xc -std=c11 -Wall -Wextra -Werror'
-alias wtrl='curl wttr.in/lodz'
-alias wtrb='curl wttr.in/wroclaw'
-#alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
-alias ssr='sudo systemctl restart'
-alias ssrn='sudo systemctl restart NetworkManager'
-alias ssrws='sudo systemctl restart wpa_supplicant'
-alias rkt='racket'
-alias info='info --vi-keys'
-alias hpsetup='sudo hp-setup'
 
-# some config aliases
-# apparently if I want to use variables they need to
-# be in double quotes because otherwise they do not work correctly
-alias cfa="$EDITOR $XDG_CONFIG_HOME/shell/aliases"
-alias cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc"
-alias cfb="$EDITOR ~/.bashrc"
-alias cfv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim"
-alias cfp="$EDITOR ~/.zprofile"
-alias cfx="$EDITOR $XDG_CONFIG_HOME/x11/xdefaults"
-alias cfs="$EDITOR $XDG_CONFIG_HOME/x11/xinitrc"
-alias cfev="$EDITOR $XDG_CONFIG_HOME/shell/variables"
-alias cffm="$EDITOR $XDG_CONFIG_HOME/ranger/rc.conf"
-alias cfwm="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart"
+# various shell utilities aliases
+alias vi='nvim' \
+      info='info --vi-keys' \
+      less='less -r' \
+      grep='grep --color=always' \
+      rmd='rm -rf' \
+      k9='killall -9' \
+      p3="python3 -q $@" \
+      ea="source *env/bin/activate" \
+      rg='ranger' \
+      nb='newsboat' \
+      szp="source $HOME/.zprofile" \
+      sz="source $XDG_CONFIG_HOME/zsh/.zshrc"
+
+# systemctl aliases
+alias po='sudo systemctl poweroff' \
+      rb='sudo systemctl reboot' \
+      ssr='sudo systemctl restart' \
+      ss='systemctl suspend'
+
+# youtube-dl (pro) aliases
+alias yt='youtube-dl' \
+      yta='yt-dlp -o "$HOME/Media/music/%(title)s.%(ext)s" -x --audio-format ogg' \
+      ytdlp='yt-dlp --config-location $XDG_CONFIG_HOME/youtube-dl/config' \
+      ytdlpv='yt-dlp -f bestvideo+bestaudio --config-location \
+      		     $XDG_CONFIG_HOME/yt-dlp/config' \
+      ytv='yt-dlp -f bestvideo+bestaudio "$@"'
+
+# config aliases
+alias cfa="$EDITOR $XDG_CONFIG_HOME/shell/aliases" \
+      cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc" \
+      cfv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim" \
+      cfp="$EDITOR $HOME/.zprofile" \
+      cfx="$EDITOR $XDG_CONFIG_HOME/x11/xdefaults" \
+      cfs="$EDITOR $XDG_CONFIG_HOME/x11/xinitrc" \
+      cfev="$EDITOR $XDG_CONFIG_HOME/shell/variables" \
+      cffm="$EDITOR $XDG_CONFIG_HOME/ranger/rc.conf" \
+      cfwm="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart"
 
 # git aliases
-alias gig="$EDITOR .gitignore"
-alias gi='git init'
-alias gm='git commit -am'
-alias gb='git branch'
-alias gc='git checkout'
-alias gs='git status'
-alias gcl='git clone'
-alias ga='git add'
-alias gps='git push'
+alias gig="$EDITOR .gitignore" \
+      gi='git init' \
+      gm='git commit -am' \
+      gb='git branch' \
+      gc='git checkout' \
+      gs='git status' \
+      gcl='git clone' \
+      ga='git add' \
+      gps='git push'
 
 # some cd aliases that I have to use because autocd is stupid
-alias ..='cd ..'
-alias 2.='cd ../..'
-alias 3.='cd ../../..'
-alias vcf='cd $XDG_CONFIG_HOME'
-alias vdl='cd ~/Documents/dl'
-alias vb='cd ~/.local/bin'
 # functions are faster but the ones here are useless
 # it was just an experiment
-# python aliases
-alias ea="source *env/bin/activate"
+alias ..='cd ..' \
+      2.='cd ../..' \
+      3.='cd ../../..' \
+      vcf="cd $XDG_CONFIG_HOME" \
+      vdl="cd $HOME/Documents/dl" \
+      vb="cd $HOME/.local/bin"
 
 # translate aliases
-alias t='trans'
-alias tbr="trans -brief :ru"
+alias t='trans' \
+      tbr="trans -brief :ru"

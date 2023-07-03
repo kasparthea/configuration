@@ -11,3 +11,7 @@ points() {
 	 # and file name as the second one
 	 cut -d, -f "$1" "$2" | paste -sd+ | bc
 }
+
+vu() {
+	cd "$HOME"/University/
+}
