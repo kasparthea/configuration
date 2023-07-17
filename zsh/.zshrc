@@ -10,7 +10,10 @@ setopt correct_all
 #source /usr/share/powerline/bindings/zsh/powerline.zsh
 
 bindkey -v
-bindkey "^R" history-incremental-pattern-search-backward
+#bindkey "^R" history-incremental-pattern-search-backward
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
 HISTSIZE=100000000
 SAVEHIST=100000000
