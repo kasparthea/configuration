@@ -90,6 +90,10 @@
 ;(global-set-key (kbd "<leader> bx") 'kill-buffer)
 ;(global-set-key (kbd "<leader> SPC bx") 'kill-buffer-and-window)
 
+;; (defun fix-dir ()
+  ;; "a shorter way to set default directory back to home"
+  ;; (setq default-directory (concat (getenv "HOME") "/")))
+
 (general-define-key
    ;; replace default keybindings
    "C-s" 'swiper             ; search for string in current buffer
@@ -110,6 +114,11 @@
     "fr"  'counsel-recentf    ; find recently edited files
     "fs"  'save-buffer
     "fe"  'eval-buffer
+    ;; I really did not find a better way around this
+    ;; https://stackoverflow.com/questions/354490/preventing-automatic-change-of-default-directory
+    ;; maybe something from the above link will be useful but for now the below
+    ;; is fine
+    "fd"  (lambda () (interactive) (setq default-directory (concat (getenv "HOME") "/")))
     ;;"cc"  (lambda () (interactive) (save-buffer) (recompile))
   ;;   "cc"  (lambda () (interactive)  (with-current-buffer "*compilation*"
   ;; (let (kill-buffer-hook kill-buffer-query-functions)
@@ -135,6 +144,7 @@
     "fs"  'save-buffer
     "fe"  'eval-buffer
     "cc"  'company-complete
+    "fd"  (lambda () (interactive) (setq default-directory (concat (getenv "HOME") "/")))
     ;; (kbd "C-n")  'company-select-next
 ;;     "cc"  (lambda () (interactive)  (with-current-buffer "*compilation*"
 ;;   (let (kill-buffer-hook kill-buffer-query-functions)
