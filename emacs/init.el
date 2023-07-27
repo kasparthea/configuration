@@ -34,7 +34,7 @@
    '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(org-agenda-files nil)
  '(package-selected-packages
-   '(csv-mode tree-sitter-langs tree-sitter clang-format dired-icon haskell-snippets haskell-mode typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
+   '(syslog-mode all-the-icons-dired csv-mode tree-sitter-langs tree-sitter clang-format dired-icon haskell-snippets haskell-mode typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
  '(pdf-view-use-imagemagick t))
 
 (custom-set-faces
@@ -93,6 +93,15 @@
 ;; (defun fix-dir ()
   ;; "a shorter way to set default directory back to home"
   ;; (setq default-directory (concat (getenv "HOME") "/")))
+
+;; https://emacs.stackexchange.com/questions/71520/fuzzy-search-with-counsel
+(require 'counsel)
+
+(use-package counsel
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
 
 (general-define-key
    ;; replace default keybindings
@@ -252,7 +261,20 @@
        ;; Use opam switch to lookup ocamlmerlin binary
        (setq merlin-command 'opam)))
 
+(use-package python-mode
+  :ensure nil)
+
+;; https://github.com/emacs-lsp/lsp-mode/issues/1672
+;; why does it always have to be difficult
 (require 'lsp-mode)
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (define-key lsp-mode-map "C-c l" lsp-command-map)
+  (lsp-enable-which-key-integration t))
+
 (add-hook 'python-mode-hook #'lsp)
 
 (add-hook 'rust-mode-hook
@@ -261,7 +283,7 @@
 (setq rust-format-on-save t)
 (add-hook 'rust-mode-hook #'lsp)
 ;; (setq lsp-keymap-prefix (kbd "SPC ls"))
-(setq lsp-keymap-prefix (kbd "C-c l"))
+;; 
 ;; (define-key company-mode-map (kbd "C-f") 'company-select-next)
 ;; (define-key company-mode-map (kbd "C-b") 'company-select-previous)
 
@@ -341,3 +363,6 @@
 
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+
+(use-package all-the-icons-dired)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
