@@ -2,6 +2,7 @@
 
 # various shell utilities aliases
 alias vi='nvim' \
+      vim='nvim' \
       info='info --vi-keys' \
       less='less -r' \
       grep='grep --color=always' \
@@ -22,7 +23,7 @@ alias po='sudo systemctl poweroff' \
 
 # youtube-dl (pro) aliases
 alias yt='youtube-dl' \
-      yta='yt-dlp -o "$HOME/Media/music/%(title)s.%(ext)s" -x --audio-format ogg' \
+      yta='yt-dlp -o "$HOME/Media/music/%(title)s.%(ext)s" -x --audio-format vorbis' \
       ytdlp='yt-dlp --config-location $XDG_CONFIG_HOME/youtube-dl/config' \
       ytdlpv='yt-dlp -f bestvideo+bestaudio --config-location \
       		     $XDG_CONFIG_HOME/yt-dlp/config' \
