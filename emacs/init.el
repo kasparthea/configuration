@@ -9,6 +9,27 @@
 (setq sentence-end-double-space nil)    ; sentence SHOULD end with only a point.
 ;;(setq default-fill-column 80)           ; wrap at 80th character mark
 
+
+(defvar whatever-alist
+  '(
+    ("zsh" "zsh")
+    ("sh" "sh")
+    ("bash" "sh")
+    ("python" "py")))
+
+(defun fstlake (file)
+  (cadr (assoc
+  (substring
+   (shell-command-to-string
+    (concat "basename '"
+	    (substring
+	     (shell-command-to-string (concat "head -n1 " file))
+	     0 -1) "'"))
+   0 -1) whatever-alist)))
+
+(advice-add 'file-name-extension :after-until #'fstlake)
+
+
 ;;(auto-fill-mode 1)                      ; make use of the above
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -31,10 +52,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(dracula))
  '(custom-safe-themes
-   '("fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
+   '("8721f7ee8cd0c2e56d23f757b44c39c249a58c60d33194fe546659dabc69eebd" "fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(org-agenda-files nil)
  '(package-selected-packages
-   '(syslog-mode all-the-icons-dired csv-mode tree-sitter-langs tree-sitter clang-format dired-icon haskell-snippets haskell-mode typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
+   '(org-bullets all-the-icons-ivy syslog-mode all-the-icons-dired csv-mode tree-sitter-langs tree-sitter clang-format dired-icon haskell-snippets haskell-mode typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
  '(pdf-view-use-imagemagick t))
 
 (custom-set-faces
@@ -46,9 +67,6 @@
 
 (when (display-graphic-p)
   (require 'all-the-icons))
-;; or
-(use-package all-the-icons
-  :if (display-graphic-p))
 
 (require 'evil)
 (evil-mode 1)
@@ -66,10 +84,21 @@
 
 (evil-set-leader 'normal (kbd "SPC"))
 
+;; keybinds for navigating splits
+
 (global-set-key  (kbd "<leader>wh")  'windmove-left)
 (global-set-key  (kbd "<leader>wl") 'windmove-right)
 (global-set-key  (kbd "<leader>wk")    'windmove-up)
 (global-set-key  (kbd "<leader>wj")  'windmove-down)
+
+(global-set-key  (kbd "<leader>wsh")  'split-window-below)
+(global-set-key  (kbd "<leader>wsv")  'split-window-right)
+
+(global-set-key  (kbd "<leader>wdh")  'windmove-delete-left)
+(global-set-key  (kbd "<leader>wdl")  'windmove-delete-right)
+(global-set-key  (kbd "<leader>wdk")  'windmove-delete-up)
+(global-set-key  (kbd "<leader>wdj")  'windmove-delete-down)
+(global-set-key  (kbd "<leader>wo")   'delete-other-windows)
 
 (windmove-default-keybindings)
 ;; defaults are Shift plus arrow
@@ -261,8 +290,6 @@
        ;; Use opam switch to lookup ocamlmerlin binary
        (setq merlin-command 'opam)))
 
-(use-package python-mode
-  :ensure nil)
 
 ;; https://github.com/emacs-lsp/lsp-mode/issues/1672
 ;; why does it always have to be difficult
@@ -364,5 +391,59 @@
 (global-tree-sitter-mode)
 (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
 
+(use-package all-the-icons
+  :config
+  (add-to-list 'all-the-icons-extension-icon-alist '("m"  all-the-icons-fileicon "matlab"  :face all-the-icons-orange)))
+  ;; dreary dreary workaround for shell scripts without extensions
+
+;; all the icons setup
+
 (use-package all-the-icons-dired)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+(use-package all-the-icons-ivy
+  :init (add-hook 'after-init-hook 'all-the-icons-ivy-setup))
+
+;; configuration for org mode because the default options are terrible
+;; initial source: https://zzamboni.org/post/beautifying-org-mode-in-emacs/
+
+(setq org-hide-emphasis-markers t)
+
+(use-package org-bullets
+    :config
+    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+
+(font-lock-add-keywords
+ 'org-mode
+ '(("^ *\\([-]\\) "
+    (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+(defun rainbow-elisp ()
+  (rainbow-delimiters-mode 1))
+
+(add-hook 'emacs-lisp-mode-hook 'rainbow-elisp)
+
+(defun mytest (file)
+  (if (and
+       (equal (fstlake file) "sh")
+       (eq nil
+	   (all-the-icons-match-to-alist "" all-the-icons-extension-icon-alist)))
+       "co"
+       "test"))
+
+;; the most useful thing so far
+;; (defun fstlake (file)
+;;   (substring
+;;    (shell-command-to-string
+;;     (concat "basename '"
+;; 	    (substring
+;; 	     (shell-command-to-string (concat "head -n1 " file))
+;; 	     0 -1) "'"))
+;;    0 -1))
+
+
+;; (defun my-file-name-extension (file)
+;;   (if (and (eq nil (file-name-extension file))
+;; 	   (equal (fstlake file) "sh"))
+;;       "sh"
+;;     (file-name-extension file)))
