@@ -42,7 +42,8 @@ export STACK_ROOT="$XDG_DATA_HOME"/stack
 # python
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/startup.py \
        IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter \
-       JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter
+       JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter \
+       PYTHONDONTWRITEBYTECODE=1
 
 # tex
 export TEXMFHOME=$XDG_DATA_HOME/texmf \

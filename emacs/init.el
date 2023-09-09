@@ -129,8 +129,7 @@
 (use-package counsel
   :ensure t
   :config
-  (ivy-mode 1)
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy))))
+  (ivy-mode 1))
 
 (general-define-key
    ;; replace default keybindings
