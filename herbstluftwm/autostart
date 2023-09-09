@@ -33,7 +33,7 @@ hc keybind $Mod-Return spawn term
 hc keybind $Mod-Shift-Return spawn xterm
 hc keybind $Mod-b spawn "$BROWSER"
 hc keybind $Mod-Shift-b spawn firefox
-hc keybind $Mod-d spawn dmenu_run -b -l 10 -fn "Hack Nerd Font Mono:size=11"
+hc keybind $Mod-d spawn dmenu_run -b -l 10 -fn "Hack Nerd Font Mono:size=14"
 hc keybind $Mod-f spawn "$TERMINAL" -e ranger
 hc keybind $Mod-Shift-f spawn pcmanfm
 # uni keybindings
