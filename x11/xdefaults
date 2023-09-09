@@ -13,8 +13,8 @@ URxvt.shading: 60
 URxvt.iso14755: false
 URxvt.iso14755_52: false
 URxvt.intensityStyles: true
+Xcursor.theme: Catppuccin-Mocha-Dark-Cursors
 Xcursor.size: 32
-Xcursor.theme: Sweet-cursors
 XTerm*.foreground: #F8F8F2
 XTerm*.background: #282A36
 URxvt*.depth: 32

@@ -1,5 +1,6 @@
 #!/bin/sh
 # test for emacs with systemd
+xrdb -merge "$XDG_CONFIG_HOME"/x11/xdefaults
 /etc/X11/xinit/xinitrc.d/50-systemd-user.sh &
 systemctl --user restart emacs &
 feh --bg-fill --no-fehbg "$WALLPAPER" &
@@ -10,11 +11,10 @@ USERXSESSIONRC="$XDG_CACHE_HOME/x11/xsessionrc"
 ALTUSERXSESSION="$XDG_CACHE_HOME/x11/Xsession"
 ERRFILE="$XDG_CACHE_HOME/x11/xsession-errors"
 picom &
-dunst &
+# dunst &
 numlockx &
 xrandr --output DP-2 --auto --output HDMI-0 --auto --left-of DP-2 &
 #xrdb -load "$XDG_CONFIG_HOME"/x11/xdefaults &
-xrdb -merge "$XDG_CONFIG_HOME"/x11/xdefaults &
 # as per https://wiki.archlinux.org/title/Cursor_themes#Cursor_size_does_not_change_on_startup
 #barcher &
 unclutter &
