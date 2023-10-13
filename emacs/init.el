@@ -52,10 +52,10 @@
  ;; If there is more than one, they won't work right.
  '(custom-enabled-themes '(dracula))
  '(custom-safe-themes
-   '("8721f7ee8cd0c2e56d23f757b44c39c249a58c60d33194fe546659dabc69eebd" "fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
+   '("257de69e8cc7ffaf40ed1ba4abbd8d4cb1db6526a3557a9526f321306b279355" "8721f7ee8cd0c2e56d23f757b44c39c249a58c60d33194fe546659dabc69eebd" "fe1c13d75398b1c8fd7fdd1241a55c286b86c3e4ce513c4292d01383de152cb7" default))
  '(org-agenda-files nil)
  '(package-selected-packages
-   '(org-bullets all-the-icons-ivy syslog-mode all-the-icons-dired csv-mode tree-sitter-langs tree-sitter clang-format dired-icon haskell-snippets haskell-mode typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
+   '(exec-path-from-shell org-bullets all-the-icons-ivy syslog-mode all-the-icons-dired csv-mode tree-sitter-langs tree-sitter clang-format dired-icon haskell-snippets haskell-mode typescript-mode js2-mode js3-mode js-auto-beautify magit bash-completion ocamlformat utop dune merlin-company flycheck-ocaml yasnippet-snippets yasnippet validate-html rust-mode which-key openwith pdf-tools all-the-icons evil-vimish-fold ini-mode general counsel swiper-helm swiper ivy rainbow-delimiters rainbow-mode latex-extra company-math evil-tex beacon default-text-scale csharp-mode neotree markdown-preview-mode auctex-cluttex auctex-latexmk auctex python jedi format-all flymake-python-pyflakes flymake dashboard evil dracula-theme))
  '(pdf-view-use-imagemagick t))
 
 (custom-set-faces
@@ -446,3 +446,19 @@
 ;; 	   (equal (fstlake file) "sh"))
 ;;       "sh"
 ;;     (file-name-extension file)))
+
+(evil-set-undo-system 'undo-redo)
+
+;; https://www.reddit.com/r/emacs/comments/sv2ys8/emacs_noob_here_how_do_i_get_redo_functionality/
+;; https://github.com/syl20bnr/spacemacs/issues/14036
+;; https://github.com/doomemacs/doomemacs/issues/4135
+;; https://emacs.stackexchange.com/questions/15090/recentf-doesnt-remember-all-files
+(run-at-time "5 min" 300 'recentf-save-list)
+
+(when (daemonp)
+  (exec-path-from-shell-initialize))
+
+;; https://github.com/purcell/exec-path-from-shell
+;; https://www.reddit.com/r/emacs/comments/okumw2/why_does_getenv_not_show_environment_variables/
+;; https://github.com/syl20bnr/spacemacs/issues/12451
+;; https://emacs.stackexchange.com/questions/34731/async-shell-command-cant-find-command
