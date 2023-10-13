@@ -32,7 +32,10 @@ hc keybind $Mod-r remove
 hc keybind $Mod-Return spawn term
 hc keybind $Mod-Shift-Return spawn xterm
 hc keybind $Mod-b spawn "$BROWSER"
-hc keybind $Mod-Shift-b spawn firefox
+private_arr=($PRIVATE_BROWSER)
+hc keybind $Mod-Shift-b spawn ${private_arr[@]}
+#not helpful as it is for zsh https://stackoverflow.com/questions/3434509/unpack-string-in-variable
+# https://stackoverflow.com/questions/1469849/how-to-split-one-string-into-multiple-strings-separated-by-at-least-one-space-in
 hc keybind $Mod-d spawn dmenu_run -b -l 10 -fn "Hack Nerd Font Mono:size=14"
 hc keybind $Mod-f spawn "$TERMINAL" -e ranger
 hc keybind $Mod-Shift-f spawn pcmanfm
@@ -117,6 +120,8 @@ hc keybind $Mod-period use_index +1 --skip-visible
 hc keybind $Mod-comma  use_index -1 --skip-visible
 
 # layouting
+# what is the difference between first likne in this section and the last
+# I genuinly do not know
 hc keybind $Mod-s floating toggle
 hc keybind $Mod-m fullscreen toggle
 hc keybind $Mod-Control-f set_attr clients.focus.floating toggle
