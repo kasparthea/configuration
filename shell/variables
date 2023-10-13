@@ -33,6 +33,7 @@ export QT_QPA_PLATFORMTHEME=gtk2 \
 export EDITOR='nvim' \
        TERMINAL='alacritty' \
        BROWSER='firefox' \
+       PRIVATE_BROWSER='firefox --private-window' \
        WALLPAPER=$HOME/Media/pictures/wallpapers/Street_Lights_Twilight_Sky.jpg \
        JOURNAL_DIRECTORY="$HOME/Journals"
 
