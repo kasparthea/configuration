@@ -296,9 +296,10 @@
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
-  (setq lsp-keymap-prefix "C-c l")
+  (setq lsp-keymap-prefix (kbd "C-c l")) ;; actually this wall all wrong without kbd
   :config
-  (define-key lsp-mode-map "C-c l" lsp-command-map)
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map) ;; and this too. Without kbd it treated it literally. But what I found online suggested that the previous version
+  ;; was correct
   (lsp-enable-which-key-integration t))
 
 (add-hook 'python-mode-hook #'lsp)
