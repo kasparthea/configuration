@@ -1,0 +1,80 @@
+#!/usr/bin/zsh
+
+# xdg
+export XDG_CONFIG_HOME="$HOME/.config" \
+       XDG_DATA_HOME="$HOME/.local/share" \
+       XDG_CACHE_HOME="$HOME/.cache"
+
+# system utilities
+export LESSHISTFILE="-" \
+       PAGER='less' \
+       BLOCKSIZE='MiB' \
+       INPUTRC="$XDG_CONFIG_HOME"/readline/inputrc \
+       WGETRC="$XDG_CONFIG_HOME"/wget/wgetrc \
+       RANDFILE=$XDG_DATA_HOME/rnd \
+       GNUPGHOME="$XDG_DATA_HOME"/gnupg \
+       ELINKS_CONFDIR="$XDG_CONFIG_HOME"/elinks \
+       RXVT_SOCKET="$XDG_RUNTIME_DIR"/urxvtd \
+       HISTFILE="$XDG_DATA_HOME"/shell/bash_history \
+       ZDOTDIR="$XDG_CONFIG_HOME/zsh" \
+       WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
+
+## x11
+export XINITRC="$XDG_CONFIG_HOME"/x11/xinitrc \
+       XAUTHORITY="$XDG_DATA_HOME"/xorg/Xauthority \
+       ICEAUTHORITY="$XDG_CACHE_HOME"/ICEAuthority \
+       XCOMPOSEFILE="$XDG_CACHE_HOME"/x11/xcompose
+
+## themes
+export QT_QPA_PLATFORMTHEME=gtk2 \
+       GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc \
+
+# personal
+export EDITOR='nvim' \
+       TERMINAL='alacritty' \
+       BROWSER='firefox' \
+       PRIVATE_BROWSER='firefox --private-window' \
+       WALLPAPER=$HOME/Media/pictures/wallpapers/City_Bridge.jpg \
+       JOURNAL_DIRECTORY="$HOME/Journals"
+
+# haskell variables
+export STACK_ROOT="$XDG_DATA_HOME"/stack
+
+# python
+export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/startup.py \
+       IPYTHONDIR="$XDG_CONFIG_HOME"/jupyter \
+       JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME"/jupyter \
+       PYTHONDONTWRITEBYTECODE=1
+
+# tex
+export TEXMFHOME=$XDG_DATA_HOME/texmf \
+       TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var \
+       TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
+
+# octave
+export OCTAVE_HISTFILE="$XDG_CACHE_HOME/octave-hsts" \
+       OCTAVE_SITE_INITFILE="$XDG_CONFIG_HOME/octave/octaverc"
+
+# maxima
+export MAXIMA_USERDIR="$XDG_CONFIG_HOME"/maxima
+
+# CUDA
+export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
+
+# rust
+export CARGO_HOME="$XDG_DATA_HOME"/cargo \
+       RUSTUP_HOME="$XDG_DATA_HOME"/rustup
+
+# ocaml - partial
+export OPAMROOT="$XDG_DATA_HOME/opam"
+
+# racket
+export PLTUSERHOME="$XDG_DATA_HOME"/racket
+
+# virt
+export LIBVIRT_DEFAULT_URI="qemu:///system"
+
+# docker
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker \
+       MACHINE_STORAGE_PATH="$XDG_DATA_HOME"/docker-machine
+

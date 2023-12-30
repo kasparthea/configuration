@@ -1,0 +1,17 @@
+record() {
+	ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0 -f pulse -i alsa_output.pci-0000_05_00.6.analog-stereo.monitor "$1"
+}
+
+relmacs() {
+	{ killall -9 emacs && emacs --daemon; } || emacs --daemon
+}
+
+points() {
+	 # takes field number as first argument
+	 # and file name as the second one
+	 cut -d, -f "$1" "$2" | paste -sd+ | bc
+}
+
+vu() {
+	cd "$HOME"/University/
+}

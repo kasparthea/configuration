@@ -1,0 +1,66 @@
+#!/bin/sh
+
+# various shell utilities aliases
+alias vi='nvim' \
+      vim='nvim' \
+      info='info --vi-keys' \
+      less='less -r' \
+      grep='grep --color=always' \
+      rmd='rm -rf' \
+      k9='killall -9' \
+      p3="python3 -q $@" \
+      ea="source *env/bin/activate" \
+      rg='ranger' \
+      nb='newsboat' \
+      szp="source $HOME/.zprofile" \
+      sz="source $XDG_CONFIG_HOME/zsh/.zshrc"
+
+# systemctl aliases
+alias po='sudo systemctl poweroff' \
+      rb='sudo systemctl reboot' \
+      ssr='sudo systemctl restart' \
+      ss='systemctl suspend'
+
+# youtube-dl (pro) aliases
+alias yt='youtube-dl' \
+      yta='yt-dlp -o "$HOME/Media/music/%(title)s.%(ext)s" -x --audio-format vorbis' \
+      ytdlp='yt-dlp --config-location $XDG_CONFIG_HOME/youtube-dl/config' \
+      ytdlpv='yt-dlp -f bestvideo+bestaudio --config-location \
+      		     $XDG_CONFIG_HOME/yt-dlp/config' \
+      ytv='yt-dlp -f bestvideo+bestaudio "$@"'
+
+# config aliases
+alias cfa="$EDITOR $XDG_CONFIG_HOME/shell/aliases" \
+      cfz="$EDITOR $XDG_CONFIG_HOME/zsh/.zshrc" \
+      cfv="$EDITOR $XDG_CONFIG_HOME/nvim/init.vim" \
+      cfp="$EDITOR $HOME/.zprofile" \
+      cfx="$EDITOR $XDG_CONFIG_HOME/x11/xdefaults" \
+      cfs="$EDITOR $XDG_CONFIG_HOME/x11/xinitrc" \
+      cfev="$EDITOR $XDG_CONFIG_HOME/shell/variables" \
+      cffm="$EDITOR $XDG_CONFIG_HOME/ranger/rc.conf" \
+      cfwm="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart"
+
+# git aliases
+alias gig="$EDITOR .gitignore" \
+      gi='git init' \
+      gm='git commit -am' \
+      gb='git branch' \
+      gc='git checkout' \
+      gs='git status' \
+      gcl='git clone' \
+      ga='git add' \
+      gps='git push'
+
+# some cd aliases that I have to use because autocd is stupid
+# functions are faster but the ones here are useless
+# it was just an experiment
+alias ..='cd ..' \
+      2.='cd ../..' \
+      3.='cd ../../..' \
+      vcf="cd $XDG_CONFIG_HOME" \
+      vdl="cd $HOME/Documents/dl" \
+      vb="cd $HOME/.local/bin"
+
+# translate aliases
+alias t='trans' \
+      tbr="trans -brief :ru"

@@ -1,0 +1,1 @@
+-N 12 -c --restrict-filenames -o '$HOME/Media/videos/saved/%(title)s.%(ext)s'
