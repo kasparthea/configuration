@@ -16,9 +16,9 @@ alias vi='nvim' \
       sz="source $XDG_CONFIG_HOME/zsh/.zshrc"
 
 # systemctl aliases
-alias po='sudo systemctl poweroff' \
-      rb='sudo systemctl reboot' \
-      ssr='sudo systemctl restart' \
+alias po='systemctl poweroff' \
+      rb='systemctl reboot' \
+      ssr='systemctl restart' \
       ss='systemctl suspend'
 
 # youtube-dl (pro) aliases
@@ -38,7 +38,8 @@ alias cfa="$EDITOR $XDG_CONFIG_HOME/shell/aliases" \
       cfs="$EDITOR $XDG_CONFIG_HOME/x11/xinitrc" \
       cfev="$EDITOR $XDG_CONFIG_HOME/shell/variables" \
       cffm="$EDITOR $XDG_CONFIG_HOME/ranger/rc.conf" \
-      cfwm="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart"
+      cfwm="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart" \
+      cff="$EDITOR $XDG_CONFIG_HOME/shell/functions"
 
 # git aliases
 alias gig="$EDITOR .gitignore" \
