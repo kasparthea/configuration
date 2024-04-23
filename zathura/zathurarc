@@ -1,3 +1,4 @@
 set recolor true
 set window-title-basename true
 set selection-clipboard clipboard
+set statusbar-home-tilde true
