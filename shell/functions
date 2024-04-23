@@ -15,3 +15,7 @@ points() {
 vu() {
 	cd "$HOME"/University/
 }
+
+note() {
+	"$EDITOR" "$HOME"/Notes/scratch/$(uuidgen).txt
+}
