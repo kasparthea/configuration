@@ -94,7 +94,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "d", lazy.spawn('rofi -show drun'), desc="Spawn a command using a prompt widget"),
     Key([mod], 'period', lazy.screen.next_group()),
-    Key([mod], 'comma', lazy.screen.next_group()),
+    Key([mod], 'comma', lazy.screen.prev_group()),
 ]
 
 
