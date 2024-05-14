@@ -46,7 +46,7 @@ hc keybind $Mod-Shift-f spawn pcmanfm
 hc keybind $Mod-p spawn pass
 hc keybind $Mod-Shift-n spawn xournalpp
 hc keybind $Mod-e spawn emacsclient -c
-hc keybind $Mod-v spawn "$TERMINAL" -e "$EDITOR"
+hc keybind $Mod-v spawn clipcat-menu
 hc keybind $Mod-Shift-s spawn scv
 # function key binds
 # first for sound
