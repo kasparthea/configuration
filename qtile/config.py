@@ -21,10 +21,14 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
     Key([mod], 'e', lazy.spawn('emacsclient -c')),
     Key([mod], 'b', lazy.spawn(browser)),
+    Key([mod], 'f', lazy.spawn(f'{terminal} -e ranger')),
+    Key([mod], 'm', lazy.window.toggle_fullscreen()),
     Key([mod, 'shift'], 'b', lazy.spawn(private_browser)),
     Key([mod], "tab", lazy.layout.next(), desc="Move window focus to other window"),
-    # Move windows between left/right columns or move up/down in current stack.
-    # Moving out of range in Columns layout will create new column.
+    Key(
+        [mod, "shift"],
+        "f",
+        lazy.spawn('pcmanfm')),
     Key(
         [mod, "shift"],
         "h",
@@ -79,14 +83,8 @@ keys = [
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     # Toggle between different layouts as defined below
-    Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
+    Key([mod], "Space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
-    Key(
-        [mod],
-        "f",
-        lazy.window.toggle_fullscreen(),
-        desc="Toggle fullscreen on the focused window",
-    ),
     Key([mod], "s",
         lazy.window.toggle_floating(),
         desc="Toggle floating on the focused window"),
@@ -125,16 +123,11 @@ for i in groups:
     )
 
 layouts = [
+    layout.Bsp(),
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
     # layout.RatioTile(),
-    # layout.Tile(),
     # layout.TreeTab(),
     # layout.VerticalTile(),
     # layout.Zoomy(),
@@ -145,10 +138,34 @@ widget_defaults = dict(
     fontsize=12,
     padding=3,
 )
+
 extension_defaults = widget_defaults.copy()
 
 screens = [
-    Screen(),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.CurrentLayout(),
+                widget.GroupBox(),
+                widget.Prompt(),
+                widget.WindowName(),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#ff0000", "#ffffff"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+                widget.Systray(),
+                widget.Battery(battery=1, charge_char='C', discharge_char='D', format='{char} {percent:2.0%}'),
+                widget.Battery(battery=0, charge_char='C', discharge_char='D', format='{char} {percent:2.0%}'),
+                widget.Clock(format="%Y-%m-%d %H:%M:%S"),
+                widget.QuickExit(),
+            ],
+            24,
+            border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+        ),
+    ),
 ]
 
 # Drag floating layouts.
@@ -160,7 +177,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 floats_kept_above = True
 cursor_warp = False

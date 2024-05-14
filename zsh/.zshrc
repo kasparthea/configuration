@@ -48,6 +48,12 @@ fi
 setopt extendedhistory
 setopt sharehistory
 
+if [[ $(loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}') ]]; then
+	gsettings set org.gnome.desktop.interface gtk-theme gtk-master
+	gsettings set org.gnome.desktop.interface icon-theme Dracula
+	gsettings set org.gnome.desktop.interface cursor-theme Catppuccin-Mocha-Dark-Cursors
+fi
+
 # https://old.reddit.com/r/tmux/comments/ghld8p/why_my_tmux_doesnt_sync_command_history_between/?sort=old
 # need to click + next to "deleted" to see actually relevant information
 # though the following link is much better
