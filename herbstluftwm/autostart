@@ -38,6 +38,7 @@ hc keybind $Mod-Shift-b spawn ${private_arr[@]}
 # https://stackoverflow.com/questions/1469849/how-to-split-one-string-into-multiple-strings-separated-by-at-least-one-space-in
 #hc keybind $Mod-d spawn dmenu_run -b -l 10 -fn "Hack Nerd Font Mono:size=14"
 hc keybind $Mod-d spawn rofi -show drun
+hc keybind Mod1-Tab spawn rofi -show window
 hc keybind $Mod-Shift-d spawn rofi -show run
 hc keybind $Mod-f spawn "$TERMINAL" -e ranger
 hc keybind $Mod-Shift-f spawn pcmanfm
