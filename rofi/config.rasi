@@ -4,6 +4,7 @@ configuration {
     show-icons:      true;
     display-drun:    "";
     disable-history: false;
+    modes: "window,drun,run,ssh,filebrowser";
 }
 
 * {
