@@ -38,7 +38,7 @@ bindkey '^E' autosuggest-execute
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 
 if [[ $(tty) = /dev/pts/* ]]; then
-	#eval "$(starship init zsh)"
+	eval "$(starship init zsh)"
 	alias ls='eza --icons --color=always'
 	alias ll='eza -lah --icons --color=always'
 	#PROMPT="%(?:%{$fg_bold[red]%}%{$fg_bold[green]%}%{$fg_bold[yellow]%} :%{$fg_bold[red]%} )%{$fg_bold[cyan]%} "
@@ -48,11 +48,11 @@ fi
 setopt extendedhistory
 setopt sharehistory
 
-if [[ $(loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}') ]]; then
-	gsettings set org.gnome.desktop.interface gtk-theme gtk-master
-	gsettings set org.gnome.desktop.interface icon-theme Dracula
-	gsettings set org.gnome.desktop.interface cursor-theme Catppuccin-Mocha-Dark-Cursors
-fi
+# if [[ $(loginctl show-session $(awk '/tty/ {print $1}' <(loginctl)) -p Type | awk -F= '{print $2}') ]]; then
+# 	gsettings set org.gnome.desktop.interface gtk-theme gtk-master
+# 	gsettings set org.gnome.desktop.interface icon-theme Dracula
+# 	gsettings set org.gnome.desktop.interface cursor-theme Catppuccin-Mocha-Dark-Cursors
+# fi
 
 # https://old.reddit.com/r/tmux/comments/ghld8p/why_my_tmux_doesnt_sync_command_history_between/?sort=old
 # need to click + next to "deleted" to see actually relevant information
@@ -64,3 +64,5 @@ fi
 # turns out that I need to press enter for the command to be available when scrolling upwards
 # https://github.com/junegunn/fzf/issues/50
 # no hope
+
+source $XDG_CONFIG_HOME/zsh/catppuccin_mocha-zsh-syntax-highlighting.zsh

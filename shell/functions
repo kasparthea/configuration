@@ -19,3 +19,14 @@ vu() {
 note() {
 	"$EDITOR" "$HOME"/Notes/scratch/$(uuidgen).txt
 }
+
+latest() {
+	position=${1:-1}
+	"$EDITOR" $(/bin/ls -l -t ~/Notes/scratch/*.txt | sed "${position}q;d" | cut -d' ' -f10)
+}
+
+lscan() {
+	host=$1
+	target=$2
+	rsync -avh --progress ${host}:~/documents/"Office Lens"/"$(date +%Y_%m_%d)*" $target
+}
