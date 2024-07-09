@@ -10,11 +10,10 @@ terminal = guess_terminal()
 
 browser = os.environ['BROWSER']
 private_browser = os.environ['PRIVATE_BROWSER']
+wallpaper = os.environ['WALLPAPER']
 
 keys = [
-    # A list of available commands that can be bound to keys can be found
-    # at https://docs.qtile.org/en/latest/manual/config/lazy.html
-    # Switch between windows
+    # https://docs.qtile.org/en/latest/manual/config/lazy.html
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
     Key([mod], "j", lazy.layout.down(), desc="Move focus down"),
@@ -23,12 +22,19 @@ keys = [
     Key([mod], 'b', lazy.spawn(browser)),
     Key([mod], 'f', lazy.spawn(f'{terminal} -e ranger')),
     Key([mod], 'm', lazy.window.toggle_fullscreen()),
+    Key([mod], 'v', lazy.spawn('copyq show')),
     Key([mod, 'shift'], 'b', lazy.spawn(private_browser)),
     Key([mod], "tab", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([], 'XF86AudioLowerVolume', lazy.spawn('voldec')),
+    Key([], 'XF86AudioRaiseVolume', lazy.spawn('volup')),
     Key(
         [mod, "shift"],
         "f",
         lazy.spawn('pcmanfm')),
+    Key(
+        [mod, 'shift'],
+        'd',
+        lazy.spawn('rofi -show run')),
     Key(
         [mod, "shift"],
         "h",
@@ -48,8 +54,6 @@ keys = [
         "k",
         lazy.layout.shuffle_up(),
         desc="Move window up"),
-    # Grow windows. If current window is on the edge of screen and direction
-    # will be to screen edge - window would shrink.
     Key(
         [mod, "control"],
         "h",
@@ -71,10 +75,6 @@ keys = [
         lazy.layout.grow_up(),
         desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-    # Toggle between split and unsplit sides of stack.
-    # Split = all windows displayed
-    # Unsplit = 1 window displayed, like Max layout, but still with
-    # multiple stack panes
     Key(
         [mod, "shift"],
         "Return",
@@ -82,6 +82,7 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Backspace", lazy.next_screen()),
     # Toggle between different layouts as defined below
     Key([mod], "Space", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
@@ -101,7 +102,6 @@ groups = [Group(i) for i in "123456789"]
 for i in groups:
     keys.extend(
         [
-            # mod1 + letter of group = switch to group
             Key(
                 [mod],
                 i.name,
@@ -123,7 +123,10 @@ for i in groups:
     )
 
 layouts = [
-    layout.Bsp(),
+    layout.Bsp(
+        border_focus='#50fa7b', border_normal='#101010',
+        border_on_single=True, wrap_clients=True,
+    ),
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -141,29 +144,37 @@ widget_defaults = dict(
 
 extension_defaults = widget_defaults.copy()
 
+battery_theme_path = f'{os.environ["XDG_CONFIG_HOME"]}/qtile/battery-icons'
+
 screens = [
     Screen(
+        wallpaper=wallpaper, wallpaper_mode='fill',
         top=bar.Bar(
             [
                 widget.CurrentLayout(),
                 widget.GroupBox(),
-                widget.Prompt(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                widget.Systray(),
-                widget.Battery(battery=1, charge_char='C', discharge_char='D', format='{char} {percent:2.0%}'),
+                # widget.PulseVolume(),
+                widget.Backlight(backlight_name='intel_backlight')
+                if os.path.isdir('/sys/class/backlight/intel_backlight') else widget.Backlight(),
+                # BAT1 is external battery in my case and I disconnet it sometimes
+                # however it seems that after the disconnect the bar has to be restarted manually
+                # still better (definitely for now) than just displaying text battery not found or something
+                widget.Battery(battery=1, charge_char='C', discharge_char='D', format='{char} {percent:2.0%}')
+                if os.path.isdir('/sys/class/power_supply/BAT1') else widget.Spacer(length=0),
+                widget.BatteryIcon(battery=1, theme_path=battery_theme_path)
+                if os.path.isdir('/sys/class/power_supply/BAT1') else widget.Spacer(length=0),
+                # adding None in else, caused the bar to crash and qtile to be stuck on only 1 workspace
+                # keyboard shortcuts did not work at all but I could use already running terminal there
+                # to edit the config and reload WM to the previous state
                 widget.Battery(battery=0, charge_char='C', discharge_char='D', format='{char} {percent:2.0%}'),
+                widget.BatteryIcon(battery=0, theme_path=battery_theme_path),
                 widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                 widget.QuickExit(),
             ],
             24,
-            border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            border_width=[2, 2, 2, 2],  # Draw top and bottom borders
+            border_color=["ff00ff", "ff00ff", "ff00ff", "ff00ff"]  # Borders are magenta
         ),
     ),
 ]
@@ -196,20 +207,9 @@ floating_layout = layout.Floating(
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
-
-# If things like steam games want to auto-minimize themselves when losing
-# focus, should we respect this or not?
 auto_minimize = True
 
 # When using the Wayland backend, this can be used to configure input devices.
 wl_input_rules = None
 
-# XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
-# string besides java UI toolkits; you can see several discussions on the
-# mailing lists, GitHub issues, and other WM documentation that suggest setting
-# this string if your java app doesn't work correctly. We may as well just lie
-# and say that we're a working one by default.
-#
-# We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
-# java that happens to be on java's whitelist.
 wmname = "LG3D"
