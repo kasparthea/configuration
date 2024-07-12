@@ -35,11 +35,9 @@ export EDITOR='nvim' \
        TERMINAL='alacritty' \
        BROWSER='firefox' \
        PRIVATE_BROWSER='firefox --private-window' \
-       WALLPAPER=$HOME/Media/pictures/wallpapers/City_Bridge.jpg \
-       JOURNAL_DIRECTORY="$HOME/Journals"
-
-# haskell variables
-export STACK_ROOT="$XDG_DATA_HOME"/stack
+       WALLPAPER="$(xdg-user-dir PICTURES)"/wallpapers/City_Bridge.jpg \
+       JOURNAL_DIRECTORY="$HOME/Journals" \
+       GRIM_DEFAULT_DIR="$(xdg-user-dir PICTURES)"/saved
 
 # python
 export PYTHONSTARTUP="$XDG_CONFIG_HOME"/python/startup.py \
@@ -52,25 +50,8 @@ export TEXMFHOME=$XDG_DATA_HOME/texmf \
        TEXMFVAR=$XDG_CACHE_HOME/texlive/texmf-var \
        TEXMFCONFIG=$XDG_CONFIG_HOME/texlive/texmf-config
 
-# octave
-export OCTAVE_HISTFILE="$XDG_CACHE_HOME/octave-hsts" \
-       OCTAVE_SITE_INITFILE="$XDG_CONFIG_HOME/octave/octaverc"
-
-# maxima
-export MAXIMA_USERDIR="$XDG_CONFIG_HOME"/maxima
-
 # CUDA
 export CUDA_CACHE_PATH="$XDG_CACHE_HOME"/nv
-
-# rust
-export CARGO_HOME="$XDG_DATA_HOME"/cargo \
-       RUSTUP_HOME="$XDG_DATA_HOME"/rustup
-
-# ocaml - partial
-export OPAMROOT="$XDG_DATA_HOME/opam"
-
-# racket
-export PLTUSERHOME="$XDG_DATA_HOME"/racket
 
 # virt
 export LIBVIRT_DEFAULT_URI="qemu:///system"
