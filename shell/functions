@@ -30,3 +30,7 @@ lscan() {
 	target=$2
 	rsync -avh --progress ${host}:~/documents/"Office Lens"/"$(date +%Y_%m_%d)*" $target
 }
+
+b() {
+	nvim $(which "$1")
+}
