@@ -41,17 +41,6 @@ alias cfa="$EDITOR $XDG_CONFIG_HOME/shell/aliases" \
       cfwm="$EDITOR $XDG_CONFIG_HOME/herbstluftwm/autostart" \
       cff="$EDITOR $XDG_CONFIG_HOME/shell/functions"
 
-# git aliases
-alias gig="$EDITOR .gitignore" \
-      gi='git init' \
-      gm='git commit -am' \
-      gb='git branch' \
-      gc='git checkout' \
-      gs='git status' \
-      gcl='git clone' \
-      ga='git add' \
-      gps='git push'
-
 # some cd aliases that I have to use because autocd is stupid
 # functions are faster but the ones here are useless
 # it was just an experiment
