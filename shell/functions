@@ -1,36 +1,38 @@
-record() {
+function record() {
 	ffmpeg -video_size 1920x1080 -framerate 30 -f x11grab -i :0.0 -f pulse -i alsa_output.pci-0000_05_00.6.analog-stereo.monitor "$1"
 }
 
-relmacs() {
+function relmacs() {
 	{ killall -9 emacs && emacs --daemon; } || emacs --daemon
 }
 
-points() {
+function points() {
 	 # takes field number as first argument
 	 # and file name as the second one
 	 cut -d, -f "$1" "$2" | paste -sd+ | bc
 }
 
-vu() {
+function vu() {
 	cd "$HOME"/University/
 }
 
-note() {
+function note() {
 	"$EDITOR" "$HOME"/Notes/scratch/$(uuidgen).txt
 }
 
-latest() {
+function latest() {
 	position=${1:-1}
-	"$EDITOR" $(/bin/ls -l -t ~/Notes/scratch/*.txt | sed "${position}q;d" | cut -d' ' -f10)
+	column=9
+	filename=$(/bin/ls -l -t ~/Notes/scratch/*.txt | sed "${position}q;d" | xargs | cut -d' ' -f$column)
+	"$EDITOR" $filename
 }
 
-lscan() {
+function lscan() {
 	host=$1
 	target=$2
 	rsync -avh --progress ${host}:~/documents/"Office Lens"/"$(date +%Y_%m_%d)*" $target
 }
 
-b() {
+function b() {
 	nvim $(which "$1")
 }

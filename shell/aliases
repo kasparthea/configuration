@@ -18,8 +18,8 @@ alias vi='nvim' \
 # systemctl aliases
 alias po='systemctl poweroff' \
       rb='systemctl reboot' \
-      ssr='systemctl restart' \
-      ss='systemctl suspend'
+      sctlr='systemctl restart' \
+      sctls='systemctl suspend'
 
 # youtube-dl (pro) aliases
 alias yt='youtube-dl' \
@@ -47,9 +47,9 @@ alias cfa="$EDITOR $XDG_CONFIG_HOME/shell/aliases" \
 alias ..='cd ..' \
       2.='cd ../..' \
       3.='cd ../../..' \
-      vcf="cd $XDG_CONFIG_HOME" \
-      vdl="cd $HOME/Documents/dl" \
-      vb="cd $HOME/.local/bin"
+      gcf="cd $XDG_CONFIG_HOME" \
+      gdl="cd $HOME/Documents/dl" \
+      gb="cd $HOME/.local/bin"
 
 # translate aliases
 alias t='trans' \
