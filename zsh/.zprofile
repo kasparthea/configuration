@@ -1,4 +1,4 @@
-export PATH=$HOME/.local/share/cargo/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.nix-profile/bin:$PATH
 
 source "$HOME"/.config/shell/variables
 
