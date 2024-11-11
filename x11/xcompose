@@ -4,6 +4,6 @@
 
 <Multi_key> <s> <s> : "ß"
 
-<Multi_key> <A> <E> : "Ä"
-<Multi_key> <U> <E> : "Ü"
-<Multi_key> <O> <E> : "Ö"
+<Multi_key> <A> <e> : "Ä"
+<Multi_key> <U> <e> : "Ü"
+<Multi_key> <O> <e> : "Ö"
