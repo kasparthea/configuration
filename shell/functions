@@ -12,10 +12,6 @@ function points() {
 	 cut -d, -f "$1" "$2" | paste -sd+ | bc
 }
 
-function vu() {
-	cd "$HOME"/University/
-}
-
 function note() {
 	"$EDITOR" "$HOME"/Notes/scratch/$(uuidgen).txt
 }

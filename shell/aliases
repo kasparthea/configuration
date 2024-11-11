@@ -49,8 +49,10 @@ alias ..='cd ..' \
       3.='cd ../../..' \
       gcf="cd $XDG_CONFIG_HOME" \
       gdl="cd $HOME/Documents/dl" \
-      gb="cd $HOME/.local/bin"
+      gb="cd $HOME/.local/bin" \
+      gu="cd $HOME/University"
 
 # translate aliases
 alias t='trans' \
-      tbr="trans -brief :ru"
+      tbr="trans -brief :ru" \
+      td='trans -f de "$@"'
