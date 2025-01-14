@@ -19,4 +19,5 @@ systemctl --user restart emacs
 picom &
 unclutter &
 copyq &
-exec herbstluftwm --locked
+#exec herbstluftwm --locked
+exec qtile start

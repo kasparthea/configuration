@@ -1,4 +1,4 @@
-export PATH=$HOME/.local/bin:$HOME/.nix-profile/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.nix-profile/bin:$HOME/.local/lib/:$PATH
 
 source "$HOME"/.config/shell/variables
 
