@@ -96,6 +96,12 @@ keys = [
         lazy.layout.toggle_split(),
         desc="Toggle between split and unsplit sides of stack",
     ),
+    Key(
+        [mod, "shift"],
+        "s",
+        lazy.spawn("scv"),
+        desc="Screenshot selected area",
+    ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "Backspace", lazy.next_screen()),
     # Toggle between different layouts as defined below
@@ -126,7 +132,7 @@ for i in groups:
             Key(
                 [mod, "shift"],
                 i.name,
-                lazy.window.togroup(i.name, switch_group=True),
+                lazy.window.togroup(i.name, switch_group=False),
                 desc="Switch to & move focused window to group {}".format(i.name),
             ),
             # Or, use below if you prefer not to switch to that group.
@@ -141,6 +147,7 @@ layouts = [
         border_focus='#50fa7b', border_normal='#101010',
         border_on_single=True, wrap_clients=True,
     ),
+    layout.Max(),
     # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=5),
     # layout.Stack(num_stacks=2),
     # layout.RatioTile(),
@@ -150,7 +157,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="Hack Regular Nerd Font Complete",
+    font="Hack Nerd Font Mono",
     fontsize=12,
     padding=3,
 )
@@ -164,7 +171,6 @@ screens = [
         wallpaper=wallpaper, wallpaper_mode='fill',
         top=bar.Bar(
             [
-                widget.CurrentLayout(),
                 widget.GroupBox(
                     highlight_method="block",
                     this_current_screen_border="#ff79c6",
@@ -173,11 +179,18 @@ screens = [
                 widget.WindowName(
                     max_chars=50,
                 ),
-                widget.PulseVolume(),
-                widget.Backlight(backlight_name='intel_backlight')
-                if os.path.isdir('/sys/class/backlight/intel_backlight')
-                else widget.Backlight(),
-                # BAT1 is external battery in my case and I disconnet it
+                # requires pulsectl-asyncio
+                widget.PulseVolume(
+                    emoji=True,
+                    font="Noto Color Emoji",
+                    fontsize=18,
+                    padding=0,
+                ),
+                widget.PulseVolume(padding=0),
+                # widget.Backlight(backlight_name='intel_backlight')
+                # if os.path.isdir('/sys/class/backlight/intel_backlight')
+                # else widget.Backlight(),
+                # # BAT1 is external battery in my case and I disconnet it
                 # sometimes
                 # however it seems that after the disconnect the bar has to
                 # be restarted manually
@@ -196,6 +209,11 @@ screens = [
                 # to edit the config and reload WM to the previous state
                 widget.BatteryIcon(battery=0, theme_path=battery_theme_path),
                 widget.Battery(battery=0, format='{percent:2.0%}'),
+                # requires python-psutil
+                widget.Net(
+                    interface="wlan0",
+                    format="{up:.0f}{up_suffix} {down:.0f}{down_suffix}",
+                ),
                 widget.Clock(format="%Y-%m-%d %H:%M:%S"),
                 widget.QuickExit(),
             ],
@@ -204,6 +222,21 @@ screens = [
             border_color=["#bd93f9"] * 4,
             background="#282a36",
         ),
+    ),
+    Screen(
+        top=bar.Bar(
+            [
+                widget.GroupBox(
+                    highlight_method="block",
+                    this_current_screen_border="#ff79c6",
+                    inactive="#6272a4",
+                ),
+                widget.WindowName(
+                    max_chars=50,
+                ),
+            ],
+            24
+        )
     ),
 ]
 
@@ -235,6 +268,7 @@ floating_layout = layout.Floating(
         Match(title="pinentry"),  # GPG key password entry
     ]
 )
+
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 reconfigure_screens = True
