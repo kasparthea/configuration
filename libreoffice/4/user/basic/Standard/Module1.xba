@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module1" script:language="StarBasic">Function TimeDifference(cell As String) As Double
+    Dim ranges As Variant
+    Dim totalHours As Double
+    Dim i As Integer
+    totalHours = 0
+
+    &apos; Check if the cell is empty or zero
+    If IsEmpty(cell) Or cell = &quot;0&quot; Then
+        TimeDifference = 0
+        Exit Function
+    End If
+
+    &apos; Split multiple time ranges using &quot;&amp;&amp;&quot;
+    ranges = Split(cell, &quot;&amp;&amp;&quot;)
+    
+    &apos; Loop through each time range
+    For i = LBound(ranges) To UBound(ranges)
+        totalHours = totalHours + ProcessTimeRange(Trim(ranges(i)))
+    Next i
+
+    &apos; Return the total hours
+    TimeDifference = totalHours
+End Function
+
+&apos; Helper function to process a single &quot;start-end&quot; time range
+Function ProcessTimeRange(timeRange As String) As Double
+    Dim parts As Variant
+    Dim startTime As String, endTime As String
+    Dim startValue As Double, endValue As Double
+
+    &apos; Extract only the time portion (remove any text after numbers)
+    timeRange = RemoveNonTimeChars(timeRange)
+
+    &apos; Split into start and end times using &quot;-&quot;
+    parts = Split(timeRange, &quot;-&quot;)
+    If UBound(parts) &lt;&gt; 1 Then
+        ProcessTimeRange = 0 &apos; Invalid format
+        Exit Function
+    End If
+
+    startTime = Trim(parts(0))
+    endTime = Trim(parts(1))
+
+    &apos; Convert to time values
+    startValue = TimeValue(FixTimeFormat(startTime))
+    endValue = TimeValue(FixTimeFormat(endTime))
+
+    &apos; Calculate the difference in hours
+    ProcessTimeRange = (endValue - startValue) * 24
+End Function
+
+&apos; Helper function to fix missing &quot;:00&quot; in time values
+Function FixTimeFormat(timeStr As String) As String
+    If InStr(timeStr, &quot;:&quot;) = 0 Then
+        FixTimeFormat = timeStr &amp; &quot;:00&quot;
+    Else
+        FixTimeFormat = timeStr
+    End If
+End Function
+
+&apos; Helper function to remove non-time characters (e.g., country codes)
+Function RemoveNonTimeChars(inputStr As String) As String
+    Dim i As Integer
+    Dim cleanedStr As String
+    cleanedStr = &quot;&quot;
+
+    &apos; Loop through each character and keep only numbers, &quot;-&quot;, and &quot;:&quot;
+    For i = 1 To Len(inputStr)
+        If Mid(inputStr, i, 1) Like &quot;[0-9:-]&quot; Then
+            cleanedStr = cleanedStr &amp; Mid(inputStr, i, 1)
+        End If
+    Next i
+
+    RemoveNonTimeChars = cleanedStr
+End Function
+
+Sub Macro1
+
+End Sub</script:module>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module3" script:language="StarBasic" script:moduleType="normal">Sub FillDatesForMonth()
+    Dim oSheet As Object
+    Dim sheetName As String
+    Dim monthName As String
+    Dim monthNumber As Integer
+    Dim currentYear As Integer
+    Dim startDate As Date
+    Dim endDate As Date
+    Dim currentDate As Date
+    Dim row As Integer
+    Dim oCell As Object
+
+    &apos; Get the active sheet
+    oSheet = ThisComponent.CurrentController.ActiveSheet
+    sheetName = oSheet.Name &apos; Get the sheet name (assumed to be a month)
+
+    &apos; Convert sheet name to a valid month number (Manual mapping)
+    monthName = LCase(sheetName) &apos; Convert sheet name to lowercase for matching
+    Select Case monthName
+        Case &quot;january&quot;: monthNumber = 1
+        Case &quot;february&quot;: monthNumber = 2
+        Case &quot;march&quot;: monthNumber = 3
+        Case &quot;april&quot;: monthNumber = 4
+        Case &quot;may&quot;: monthNumber = 5
+        Case &quot;june&quot;: monthNumber = 6
+        Case &quot;july&quot;: monthNumber = 7
+        Case &quot;august&quot;: monthNumber = 8
+        Case &quot;september&quot;: monthNumber = 9
+        Case &quot;october&quot;: monthNumber = 10
+        Case &quot;november&quot;: monthNumber = 11
+        Case &quot;december&quot;: monthNumber = 12
+        Case Else
+            MsgBox &quot;Invalid sheet name. Please use the full month name (e.g., &apos;April&apos;).&quot;, 16, &quot;Error&quot;
+            Exit Sub
+    End Select
+
+    &apos; Get the current year
+    currentYear = Year(Now)
+
+    &apos; Calculate the first and last date of the month using direct assignment
+    On Error GoTo DateError
+
+    &apos; Start date: First day of the month
+    startDate = currentYear &amp; &quot;-&quot; &amp; monthNumber &amp; &quot;-01&quot;
+    &apos; End date: Last day of the month
+    endDate = currentYear &amp; &quot;-&quot; &amp; monthNumber + 1 &amp; &quot;-01&quot; &apos; Default to first day of next month
+    endDate = DateAdd(&quot;d&quot;, -1, endDate) &apos; Subtract one day to get the last day of the month
+    
+    On Error GoTo 0
+
+    &apos; Start filling from A6 (row index 5, as LibreOffice uses zero-based rows)
+    row = 5 
+
+    &apos; Fill column A with the dates
+    currentDate = startDate
+    While currentDate &lt;= endDate
+        oCell = oSheet.getCellByPosition(0, row) &apos; Column A is index 0
+        oCell.Value = currentDate
+        oCell.NumberFormat = 36 &apos; Set format to default Date
+        row = row + 1
+        currentDate = DateAdd(&quot;d&quot;, 1, currentDate) &apos; Add one day to the current date
+    Wend
+
+    Exit Sub
+
+DateError:
+    MsgBox &quot;Error calculating dates. Please check the system date and month name.&quot;, 16, &quot;Error&quot;
+End Sub
+
+</script:module>

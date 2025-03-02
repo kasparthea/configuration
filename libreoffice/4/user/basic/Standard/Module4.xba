@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module4" script:language="StarBasic" script:moduleType="normal">Sub MergeWeeks()
+    Dim oSheet As Object
+    Dim oRange As Object
+    Dim startRow As Integer, endRow As Integer
+    Dim currentDay As String
+    Dim lastRow As Integer
+    
+    oSheet = ThisComponent.CurrentController.ActiveSheet
+    
+    &apos; Get the last row with data in column B
+    lastRow = FindLastRow(oSheet, 1) &apos; Column B
+    
+    &apos; If no valid rows are found, exit
+    If lastRow &lt; 6 Then
+        MsgBox &quot;No data to process!&quot;, 48, &quot;Error&quot;
+        Exit Sub
+    End If
+    
+    startRow = 5 &apos; First row containing data
+    
+    Do While startRow &lt;= lastRow
+        endRow = startRow
+        
+        &apos; Identify the last row of the current week
+        Do While endRow &lt; lastRow
+            currentDay = oSheet.getCellByPosition(1, endRow).String &apos; Column B
+            
+            &apos; Stop merging at Saturday or if the next row starts a new week
+            If currentDay = &quot;Saturday&quot; Then Exit Do
+            If oSheet.getCellByPosition(1, endRow + 1).String = &quot;Sunday&quot; Then Exit Do
+            
+            endRow = endRow + 1
+        Loop
+        
+        &apos; Ensure at least two rows are selected before merging
+        If endRow &gt; startRow Then
+            oRange = oSheet.getCellRangeByPosition(6, startRow, 6, endRow) &apos; Column G
+            
+            &apos; Check if oRange is valid before merging
+            If Not IsNull(oRange) Then
+                oRange.Merge(True)
+                firstCell = oSheet.getCellByPosition(6, startRow)
+                sumFormula = &quot;=SUM(F&quot; &amp; startRow + 1 &amp; &quot;:F&quot; &amp; endRow + 1 &amp; &quot;)&quot;
+                
+                &apos; Set the formula in the first cell of the merged range (in column G)
+                firstCell.FormulaLocal = sumFormula
+
+
+    			firstCell.HoriJustify = com.sun.star.table.CellHoriJustify.CENTER
+    			firstCell.VertJustify = com.sun.star.table.CellVertJustify.CENTER
+
+            End If
+        End If
+        
+        &apos; Move to the next week&apos;s start row
+        startRow = endRow + 1
+    Loop
+    
+End Sub
+
+&apos; Function to find the last used row in a given column
+Function FindLastRow(oSheet As Object, colIndex As Integer) As Integer
+    Dim i As Integer
+    Dim cellValue As String
+    
+    FindLastRow = 0 &apos; Default return value
+    
+    &apos; Start from row 1000 (arbitrary large value) and search upwards
+    For i = 1000 To 0 Step -1
+        cellValue = Trim(oSheet.getCellByPosition(colIndex, i).String)
+        If cellValue &lt;&gt; &quot;&quot; Then
+            FindLastRow = i
+            Exit Function
+        End If
+    Next i
+End Function
+
+</script:module>

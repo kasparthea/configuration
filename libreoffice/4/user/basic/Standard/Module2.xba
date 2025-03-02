@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Module2" script:language="StarBasic" script:moduleType="normal">Sub SumRangeUntilToday()
+    Dim oSheet As Object
+    Dim oDatesRange As Object
+    Dim oSumRange As Object
+    Dim oCurrentCell As Object
+    Dim todayDate As Date
+    Dim i As Integer
+    Dim lastRow As Integer
+    Dim sumRange As String
+    
+    &apos; Get the active sheet
+    oSheet = ThisComponent.CurrentController.ActiveSheet
+    
+    &apos; Define the date range
+    oDatesRange = oSheet.getCellRangeByName(&quot;A2:A32&quot;)
+    
+    &apos; Get today&apos;s date
+    todayDate = Date
+    
+    &apos; Find the row number corresponding to today&apos;s date
+    lastRow = -1
+    For i = 0 To oDatesRange.Rows.Count - 1
+        If CDate(oDatesRange.getCellByPosition(0, i).Value) = todayDate Then
+            lastRow = i + 1 &apos; Make sure to get the correct row (1-based index)
+            Exit For
+        End If
+    Next i
+    
+    &apos; If the date is found, sum the corresponding range in column F
+    If lastRow &lt;&gt; -1 Then
+        sumRange = &quot;F2:F&quot; &amp; (lastRow + 1) &apos; Use proper indexing for range, 1-based
+        oSumRange = oSheet.getCellRangeByName(sumRange)
+        oCurrentCell = ThisComponent.getCurrentSelection()
+        oCurrentCell.Value = oSumRange.ComputeFunction(com.sun.star.sheet.GeneralFunction.SUM)
+    Else
+        oCurrentCell = ThisComponent.getCurrentSelection()
+        oCurrentCell.Value = &quot;Date not found&quot;
+    End If
+End Sub
+
+</script:module>
